@@ -3,7 +3,7 @@
                      list.files(file.path(find.package("dataASPEP"),"data"))))){
     packageStartupMessage(
 "Data will be downloaded now:
-"
+")
 get_data_from_web()
-)
+
   }}
