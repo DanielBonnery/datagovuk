@@ -1,0 +1,12 @@
+library(datagovuk)
+library("sp")
+library("rgdal")
+library(dplyr)
+library(leaflet)
+
+x=file.path(find.package("datagovuk"),'inst/extdata/Parish_and_Non_Civil_Parished_Areas_December_2017_Full_Clipped_Boundaries_in_England_and_Wales.zip')
+unzip(x,exdir=tempdir())
+shapeData <- readOGR(file.path(tempdir(),"Parish_and_Non_Civil_Parished_Areas_December_2017_Full_Clipped_Boundaries_in_England_and_Wales.shp"))
+shapeData <- spTransform(shapeData, CRS("+proj=longlat"))
+shapeData<-subset(shapeData,lat>54.045349&lat<55.207536 &long< -2.183764 &long>-3.611522)
+leaflet()  %>% addTiles() %>% addPolygons(data=shapeData) 
